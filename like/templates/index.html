@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid " id="first">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="btn btn-primary"  href="add/">Postar</a>
+        </li>
+    </ul>
+  <h1>My Blog</h1>
+  <p>Coloque aqui seus pensamentos.</p>
+    <ul class="index-list">
+        {% for lis in list %}
+            <li class="index-item done">
+                <span>{{lis.title}}</span>
+                <h3>{{lis.description}}</h3>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if list.has_previous %}
+                <a href="?page={{ list.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+
+            {% if list.paginator.num_pages %}
+            <span class="current">
+                {{ list.number }} de {{ list.paginator.num_pages }}
+            </span>
+            {% endif %}
+
+            {% if list.has_next %}
+                <a href="?page={{ list.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+{% endblock %}
